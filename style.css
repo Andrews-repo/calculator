@@ -6,20 +6,20 @@ body {
 
 .calc {
     max-width: 400px;
-    border: 2px rgb(157, 0, 189) solid;
+    border: 2px rgb(34, 0, 187) solid;
     border-radius: 15px;
     margin: 30px auto;
     padding: 20px;
-    background-color: #002b70;
+    background-color: #001941;
   }
 
 .screen {
-    min-height: 80px;
+    min-height: 60px;
     padding: 20px;
-    border: 2px var(--border) solid;
+    border: 2px rgb(34, 0, 187) solid;
     border-radius: 5px;
     margin-bottom: 20px;
-    background-color: gray;
+    background-color: rgb(85, 85, 85);
     font-size: 29px;
     text-align: right;
     word-wrap: break-word;
@@ -31,7 +31,7 @@ body {
 #calc-buttons{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
+    
 }
 
 button {
@@ -40,6 +40,7 @@ button {
     border: 1px;
     font-size: 18px;
     padding: 15px;
+    margin: 1px;
 }
 #alt-btn2 {
     background-color: grey;
