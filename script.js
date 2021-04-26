@@ -4,7 +4,7 @@ const opButtons = document.querySelectorAll("[data-operator]");
 const equalButton = document.querySelector("[data-equal]");
 const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
-const pointButton = documen.querySelector("[data-point]");
+const pointButton = document.querySelector("[data-point]");
 const screen = document.querySelector("[data-screen]");
 
 let firstOperand = "";
@@ -82,7 +82,7 @@ function roundResult(number) {
     return Math.round(number * 1000) / 1000;
 }
 
-function setIntput(e) {
+function setInput(e) {
     if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
     if (e.key === ".") appendPoint();
     if (e.key === "=" || e.key === "Enter") evaluate();
