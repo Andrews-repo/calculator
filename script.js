@@ -30,7 +30,7 @@ opButtons.forEach((button) =>
  );
 
 function appendNumber(number) {
-    if (screen.textContent === "0" || shouldResetScreen) shouldResetScreen();
+    if (screen.textContent === "0" || shouldResetScreen) resetScreen();
     screen.textContent += number;
 }
 
