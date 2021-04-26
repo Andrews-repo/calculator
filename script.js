@@ -93,10 +93,11 @@ function setInput(e) {
 }
 
 function convertOperator(keyboardOperator) {
-    if (keyboardOperator === "/") return "÷";
-    if (keyboardOperator === "*") return "×";
+    if (keyboardOperator === "/") return "/";
+    if (keyboardOperator === "*") return "*";
     if (keyboardOperator === "-") return "−";
     if (keyboardOperator === "+") return "+";
+    if (keyboardOperator === "%") return "%";
   }
 
 //basic math functions
@@ -129,8 +130,8 @@ function operate(operator, a, b) {
             return add(a, b);
         case "−":
             return substract(a, b);
-        case "×":
-            return multiply(a, b);
+        case "*":
+            return mult(a, b);
         case "÷":
             if (b === 0) return null;
             else return divide(a, b);
