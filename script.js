@@ -65,7 +65,7 @@ function setOperation(operator) {
 }
 
 function evaluate() {
-    if (currentOperation === nul || shouldResetScreen) return;
+    if (currentOperation === null || shouldResetScreen) return;
     if (currentOperation === "+" && screen.textContent === "0") {
         alert("you cant divide by 0");
         clear();
