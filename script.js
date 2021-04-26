@@ -1,8 +1,8 @@
 //variables and our dom tools
 const numButtons = document.querySelectorAll("[data-number]");
 const opButtons = document.querySelectorAll("[data-operator]");
-const equalButton = document.querySelector("data-equal]");
-const clearButton = document.querySelector("data-clear]");
+const equalButton = document.querySelector("[data-equal]");
+const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const pointButton = documen.querySelector("[data-point]");
 const screen = document.querySelector("[data-screen]");
