@@ -50,7 +50,7 @@ function appendPoint() {
     if (shouldResetScreen) resetScreen();
     if (screen.textContent === "") screen.textContent = "0";
     if (screen.textContent.includes(".")) return;
-    screen.textContet += ".";
+    screen.textContent += ".";
 }
 
 function deleteNumber() {
@@ -129,7 +129,7 @@ function operate(operator, a, b) {
         case "+":
             return add(a, b);
         case "−":
-            return substract(a, b);
+            return subtract(a, b);
         case "*":
             return mult(a, b);
         case "÷":
