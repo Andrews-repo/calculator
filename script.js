@@ -1,10 +1,12 @@
-//variables and our dom tools
+//variables and dom tools
 const numButtons = document.querySelectorAll("[data-number]");
 const opButtons = document.querySelectorAll("[data-operator]");
 const equalButton = document.querySelector("[data-equal]");
 const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const pointButton = document.querySelector("[data-point]");
+const percentButton = document.querySelector("[data-percent]");
+const polarityButton = document.querySelector("[data-polarity]");
 const screen = document.querySelector("[data-screen]");
 
 let firstOperand = "";
@@ -19,7 +21,7 @@ equalButton.addEventListener("click", evaluate);
 clearButton.addEventListener("click", clear);
 deleteButton.addEventListener("click", deleteNumber);
 pointButton.addEventListener("click", appendPoint);
-
+polarityButton.addEventListener("click", appendPolarity);
 
 numButtons.forEach((button) =>
     button.addEventListener("click", () => appendNumber(button.textContent))
@@ -28,6 +30,17 @@ numButtons.forEach((button) =>
 opButtons.forEach((button) =>
      button.addEventListener("click", () => setOperation(button.textContent))
  );
+
+percentButton.addEventListener("click", () => percButton()
+ );
+
+
+function percButton() {
+    setOperation(percentButton.textContent);
+    screen.textContent = operate(currentOperation, firstOperand)
+    shouldResetScreen = false;
+    currentOperation = null;
+};
 
 function appendNumber(number) {
     if (screen.textContent === "0" || shouldResetScreen) resetScreen();
@@ -44,6 +57,11 @@ function clear() {
     firstOperand = "";
     secondOperand = "";
     currentOperation = null;
+}
+function appendPolarity() {
+    if (shouldResetScreen) resetScreen();
+    if (screen.textContent === "") return;
+    screen.textContent = -1 * screen.textContent;
 }
 
 function appendPoint() {
@@ -72,14 +90,8 @@ function evaluate() {
         return;
     }
     secondOperand = screen.textContent;
-    screen.textContent = roundResult(
-        operate(currentOperation, firstOperand, secondOperand)
-    );
+    screen.textContent = operate(currentOperation, firstOperand, secondOperand)
     currentOperation = null;
-}
-
-function roundResult(number) {
-    return Math.round(number * 1000) / 1000;
 }
 
 function setInput(e) {
@@ -89,7 +101,7 @@ function setInput(e) {
     if (e.key === "Backspace") deleteNumber();
     if (e.key === "Escape") clear();
     if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/" || e.key === "%")
-            setOperation(conertOperator(e.key));
+            setOperation(convertOperator(e.key));
 }
 
 function convertOperator(keyboardOperator) {
@@ -128,7 +140,7 @@ function operate(operator, a, b) {
     switch (operator) {
         case "+":
             return add(a, b);
-        case "−":
+        case "-":
             return subtract(a, b);
         case "*":
             return mult(a, b);
@@ -136,7 +148,7 @@ function operate(operator, a, b) {
             if (b === 0) return null;
             else return divide(a, b);
         case "%":
-            return percent(a, b);
+            return percent(a);
         default:
             return null;
 }
