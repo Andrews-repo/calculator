@@ -14,8 +14,6 @@ let secondOperand = "";
 let currentOperation = null;
 let shouldResetScreen = false;
 
-//triggers calc buttons with key press
-window.addEventListener("keydown", setInput);
 //triggers calc buttons on click
 equalButton.addEventListener("click", evaluate);
 clearButton.addEventListener("click", clear);
@@ -34,47 +32,49 @@ opButtons.forEach((button) =>
 percentButton.addEventListener("click", () => percButton()
  );
 
-
+//calculates percentage of screen on button click
 function percButton() {
     setOperation(percentButton.textContent);
     screen.textContent = operate(currentOperation, firstOperand)
     shouldResetScreen = false;
     currentOperation = null;
 };
-
+//adds typed number to screen
 function appendNumber(number) {
     if (screen.textContent === "0" || shouldResetScreen) resetScreen();
     screen.textContent += number;
 }
-
+//
 function resetScreen() {
     screen.textContent = "";
     shouldResetScreen = false;
 }
-
+//sets screen to 0
 function clear() {
     screen.textContent = "0";
     firstOperand = "";
     secondOperand = "";
     currentOperation = null;
 }
+//changes number from positive to negative
 function appendPolarity() {
     if (shouldResetScreen) resetScreen();
     if (screen.textContent === "") return;
     screen.textContent = -1 * screen.textContent;
 }
-
+//adds decimal to number
 function appendPoint() {
     if (shouldResetScreen) resetScreen();
     if (screen.textContent === "") screen.textContent = "0";
     if (screen.textContent.includes(".")) return;
     screen.textContent += ".";
 }
-
+//removes number at end of sting on screen
 function deleteNumber() {
     screen.textContent = screen.textContent.toString().slice(0, -1);
 }
 
+//declares math operation
 function setOperation(operator) {
     if (currentOperation !== null) evaluate();
     firstOperand = screen.textContent;
@@ -82,6 +82,7 @@ function setOperation(operator) {
     shouldResetScreen = true;
 }
 
+//runs math equation
 function evaluate() {
     if (currentOperation === null || shouldResetScreen) return;
     if (currentOperation === "/" && screen.textContent === "0") {
@@ -93,24 +94,6 @@ function evaluate() {
     screen.textContent = operate(currentOperation, firstOperand, secondOperand)
     currentOperation = null;
 }
-
-function setInput(e) {
-    if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
-    if (e.key === ".") appendPoint();
-    if (e.key === "=" || e.key === "Enter") evaluate();
-    if (e.key === "Backspace") deleteNumber();
-    if (e.key === "Escape") clear();
-    if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/" || e.key === "%")
-            setOperation(convertOperator(e.key));
-}
-
-function convertOperator(keyboardOperator) {
-    if (keyboardOperator === "/") return "/";
-    if (keyboardOperator === "*") return "*";
-    if (keyboardOperator === "-") return "−";
-    if (keyboardOperator === "+") return "+";
-    if (keyboardOperator === "%") return "%";
-  }
 
 //basic math functions
 function add(a, b) {
@@ -133,7 +116,7 @@ function percent(a) {
     return a / 100 
 }
 
-//function for all of the math functions
+//switch function for all of the math functions
 function operate(operator, a, b) {
     a = Number(a);
     b = Number(b);
